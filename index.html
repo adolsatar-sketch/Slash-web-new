@@ -85,7 +85,7 @@ html[dir="ltr"] .nav a::after{--o:left}
   .mnav{display:block;position:fixed;top:calc(env(safe-area-inset-top,0px) + 76px);inset-inline:0;background:#000;border-bottom:1px solid var(--rule);padding:8px var(--pad) 22px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .22s,transform .22s var(--ease),visibility .22s;z-index:49}
   .mnav.open{opacity:1;transform:none;visibility:visible}
   .mnav a{display:block;padding:13px 0;border-bottom:1px solid var(--rule);text-decoration:none;font-size:17px}
-  .mnav .btn{margin-top:18px;width:100%}
+  .mnav .btn{display:flex;margin-top:18px;width:100%}
 }
 
 /* ---------- Hero ---------- */
@@ -326,28 +326,38 @@ html[dir="rtl"] .ftr nav{direction:rtl}
 .ftr-b{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:40px;font-size:13px;color:var(--ink-3)}
 .ftr-b .tl{font-family:var(--f-en);font-weight:600;color:var(--ink-2)}
 
-/* Player */
-.player{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 64px) 16px calc(env(safe-area-inset-bottom,0px) + 24px);background:rgba(0,0,0,.94);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s}
+/* Player — clean theater */
+.player{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;background:#000;opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 0 calc(env(safe-area-inset-bottom,0px) + 10px)}
 .player.open{opacity:1;visibility:visible}
-.p-box{width:min(1100px,100%);transform:translateY(16px) scale(.98);transition:transform .4s var(--ease)}
-.player.open .p-box{transform:none}
-.p-stage{position:relative;width:100%;max-height:calc(100svh - 190px);aspect-ratio:var(--ar,16/9);margin-inline:auto;background:#000;border-radius:6px;overflow:hidden}
-.p-stage.tall{width:auto;height:calc(100svh - 190px);max-width:100%}
-.p-stage iframe,.p-stage video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.p-load,.p-err{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--ink-2);font-size:14px;padding:20px}
+.p-top{display:flex;align-items:center;gap:16px;padding:6px var(--pad) 12px;direction:inherit}
+.p-info{flex:1;min-width:0}
+.p-info .cat{display:block;font-family:var(--f-en);font-size:12px;color:var(--gold);font-weight:600}
+.p-info h3{margin:2px 0 0;font-size:1.05rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-count{font-size:13px;color:var(--ink-3);flex:none}
+.p-x{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(204,204,204,.3);display:grid;place-items:center}
+.p-x:hover{border-color:var(--gold)}
+.p-x svg{width:15px}
+.p-main{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;padding:0 clamp(12px,6vw,96px);touch-action:pan-y}
+.p-stage{position:relative;height:100%;max-width:100%;aspect-ratio:var(--ar,16/9);background:#000;border-radius:6px;overflow:hidden;transform:translateZ(0)}
+.p-stage.wide{height:auto;width:100%;max-height:100%}
+.p-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.p-stage .crop{position:absolute;inset:0;overflow:hidden}
+.p-stage .crop iframe{position:absolute;left:0;top:-60px;width:100%;height:calc(100% + 120px);border:0}
+.p-stage.swap{animation:pswap .35s var(--ease)}
+@keyframes pswap{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
+.p-load,.p-err{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--ink-2);font-size:14px;padding:24px;z-index:2;pointer-events:none}
 .p-load i{width:12px;height:30px;background:var(--gold);transform:skewX(-34deg);animation:pulse 1s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.25}}
-.p-load,.p-err{z-index:2}
 .p-err{display:none;background:#000}
 .p-err.show{display:grid}
-.p-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
-.p-meta .cat{font-family:var(--f-en);font-size:12.5px;color:var(--gold);font-weight:600}
-.p-meta h3{margin:2px 0 0;font-size:1.15rem}
-.p-meta a{text-decoration:none}
-.p-x{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);inset-inline-end:16px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(204,204,204,.35);display:grid;place-items:center;background:#000}
-.p-x:hover{border-color:var(--gold)}
-.p-x svg{width:16px}
-
+.p-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid rgba(204,204,204,.25);display:grid;place-items:center;color:#fff;background:rgba(0,0,0,.4);z-index:3;transition:border-color .2s,color .2s,opacity .2s}
+.p-nav:hover{border-color:var(--gold);color:var(--gold)}
+.p-nav svg{width:9px}
+.p-nav[disabled]{opacity:.2;pointer-events:none}
+.p-prev{left:clamp(8px,2vw,28px)}.p-next{right:clamp(8px,2vw,28px)}
+.p-hint{margin:10px 0 0;text-align:center;font-size:12.5px;color:var(--ink-3);min-height:18px}
+@media (max-width:640px){.p-nav{display:none}.p-main{padding:0 8px}}
 /* Responsive */
 @media (max-width:1020px){
   .prob-grid,.prob-close,.svc-hd,.about-grid,.faq-grid,.ct-grid{grid-template-columns:1fr}
@@ -400,7 +410,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
         <button type="button" data-setlang="ar" aria-pressed="true" lang="ar">ع</button>
         <button type="button" data-setlang="en" aria-pressed="false" lang="en">EN</button>
       </div>
-      <a class="btn btn-gold btn-sm" href="#contact"><span data-l="ar">خل نحچي عن مشروعك</span><span data-l="en">Let’s Talk</span></a>
+      <a class="btn btn-gold btn-sm" href="#contact"><span data-l="ar">خل نحجي عن مشروعك</span><span data-l="en">Let’s Talk</span></a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="mnav" data-i18n-aria="menu"><i></i></button>
     </div>
   </div>
@@ -411,7 +421,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
     <a href="#process"><span data-l="ar">طريقة العمل</span><span data-l="en">How we work</span></a>
     <a href="#about"><span data-l="ar">من نحن</span><span data-l="en">About</span></a>
     <a href="#contact"><span data-l="ar">تواصل</span><span data-l="en">Contact</span></a>
-    <a class="btn btn-gold" href="#contact"><span data-l="ar">خل نحچي عن مشروعك</span><span data-l="en">Let’s Talk</span></a>
+    <a class="btn btn-gold" href="#contact"><span data-l="ar">خل نحجي عن مشروعك</span><span data-l="en">Let’s Talk</span></a>
   </div>
 </header>
 
@@ -500,7 +510,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <p class="lead" style="margin:0"><span data-l="ar">كلها تجيك من شريك إنتاج واحد: نفس طريقة التواصل، نفس مستوى الجودة، ونفس الالتزام بالمواعيد.</span><span data-l="en">All of it comes from one production partner: one line of communication, one quality bar, one commitment to deadlines.</span></p>
     </div>
     <ul class="svc-list" id="svcList"></ul>
-    <p class="svc-more rv"><span data-l="ar">وأنماط إنتاج ثانية حسب احتياج فريقك — احچي ويانا عنها.</span><span data-l="en">And other production styles as your team needs them — just ask.</span></p>
+    <p class="svc-more rv"><span data-l="ar">وأنماط إنتاج ثانية حسب احتياج فريقك — احجي ويانا عنها.</span><span data-l="en">And other production styles as your team needs them — just ask.</span></p>
   </div>
 </section>
 
@@ -512,7 +522,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <h2 class="h2" id="proc-h"><span data-l="ar">الشراكة بأربع خطوات</span><span data-l="en">The partnership, in four steps</span></h2>
     </div>
     <ol class="steps">
-      <li class="step rv"><h3><span data-l="ar">نحچي عن احتياج المشروع</span><span data-l="en">We talk through the project’s needs</span></h3><p><span data-l="ar">قهوة سوا أو <span class="en">Meeting</span> أونلاين نفهم بيه شنو يحتاج فريقك وعملاؤك.</span><span data-l="en">Over coffee or an online meeting, we learn what your team and clients need.</span></p></li>
+      <li class="step rv"><h3><span data-l="ar">نحجي عن احتياج المشروع</span><span data-l="en">We talk through the project’s needs</span></h3><p><span data-l="ar">قهوة سوا أو <span class="en">Meeting</span> أونلاين نفهم بيه شنو يحتاج فريقك وعملاؤك.</span><span data-l="en">Over coffee or an online meeting, we learn what your team and clients need.</span></p></li>
       <li class="step rv"><h3><span data-l="ar">نحدد الأسلوب والمخرجات والجدول</span><span data-l="en">We set the style, deliverables and schedule</span></h3><p><span data-l="ar">نتفق على النمط المطلوب، شنو راح يتسلم، وإيمتى.</span><span data-l="en">We agree on the style, what will be delivered, and when.</span></p></li>
       <li class="step rv"><h3><span data-l="ar"><span class="en">Slash</span> تنسّق الإنتاج</span><span data-l="en">Slash coordinates production</span></h3><p><span data-l="ar">نوفر التخصص المناسب لكل جزء من الشغل، من مكان واحد.</span><span data-l="en">We bring the right specialism to each part of the work, from one place.</span></p></li>
       <li class="step rv"><h3><span data-l="ar">تستلم شغل منظم</span><span data-l="en">You receive organised work</span></h3><p><span data-l="ar">من شريك إنتاج واحد، بدل ما تلاحق أكثر من شخص.</span><span data-l="en">From one production partner, instead of chasing several people.</span></p></li>
@@ -557,7 +567,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <details><summary><span><span data-l="ar">شنو أنواع الإنتاج اللي تكدرون توفرونها؟</span><span data-l="en">What kinds of production can you provide?</span></span><i class="pm" aria-hidden="true"></i></summary>
         <div class="ans"><p><span data-l="ar"><span class="en">Motion Graphics</span>، تصوير، مونتاج، إنتاج ومونتاج العقارات، تصميم جرافيك، تعليق صوتي <span class="en">(Voice Over)</span>، وإنتاج بالذكاء الاصطناعي — وأكثر.</span><span data-l="en">Motion graphics, filming, editing, real estate production and editing, graphic design, voice over and AI production — and more.</span></p></div></details>
       <details><summary><span><span data-l="ar">تشتغلون على مشروع واحد لو شراكة مستمرة؟</span><span data-l="en">Do you take single projects or ongoing partnerships?</span></span><i class="pm" aria-hidden="true"></i></summary>
-        <div class="ans"><p><span data-l="ar">تعاوننا مصمم للشراكة المستمرة، وأسعارنا <span class="en">B2B</span> مدعومة على هذا الأساس. إذا عندك مشروع محدد، احچي ويانا ونشوف سوا شلون نشتغل عليه.</span><span data-l="en">Our collaboration is designed for ongoing partnership, and our B2B pricing is supported on that basis. If you have a specific project, talk to us and we’ll work out together how to approach it.</span></p></div></details>
+        <div class="ans"><p><span data-l="ar">تعاوننا مصمم للشراكة المستمرة، وأسعارنا <span class="en">B2B</span> مدعومة على هذا الأساس. إذا عندك مشروع محدد، احجي ويانا ونشوف سوا شلون نشتغل عليه.</span><span data-l="en">Our collaboration is designed for ongoing partnership, and our B2B pricing is supported on that basis. If you have a specific project, talk to us and we’ll work out together how to approach it.</span></p></div></details>
       <details><summary><span><span data-l="ar">شلون نبدأ؟</span><span data-l="en">How do we start?</span></span><i class="pm" aria-hidden="true"></i></summary>
         <div class="ans"><p><span data-l="ar">قهوة سوا أو <span class="en">Meeting</span> أونلاين، نتعرف بيه على احتياج فريقك، وبعدها نحدد الأسلوب والمخرجات والجدول.</span><span data-l="en">A coffee together or an online meeting to understand your team’s needs — then we set the style, deliverables and schedule.</span></p></div></details>
     </div>
@@ -580,7 +590,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <div class="chan" id="chan"></div>
     </div>
     <form class="form rv" id="form" novalidate>
-      <h3><span data-l="ar">احچي ويانا عن احتياج فريقك</span><span data-l="en">Tell us what your team needs</span></h3>
+      <h3><span data-l="ar">احجي ويانا عن احتياج فريقك</span><span data-l="en">Tell us what your team needs</span></h3>
       <p class="hint"><span data-l="ar">الإرسال يفتح واتساب أو البريد برسالة جاهزة بتفاصيلك.</span><span data-l="en">Sending opens WhatsApp or email with your details ready to go.</span></p>
       <div class="fld"><label for="f-name"><span data-l="ar">الاسم</span><span data-l="en">Name</span></label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="fld"><label for="f-co"><span data-l="ar">الوكالة أو الشركة</span><span data-l="en">Agency or company</span></label><input id="f-co" name="company" autocomplete="organization"></div>
@@ -620,11 +630,17 @@ html[dir="rtl"] .ftr nav{direction:rtl}
 </footer>
 
 <div class="player" id="player" role="dialog" aria-modal="true" aria-labelledby="pTitle" aria-hidden="true">
-  <button class="p-x" type="button" id="pClose" data-i18n-aria="close"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
-  <div class="p-box">
-    <div class="p-stage" id="pStage"></div>
-    <div class="p-meta"><div><span class="cat" id="pCat"></span><h3 id="pTitle"></h3></div></div>
+  <div class="p-top">
+    <div class="p-info"><span class="cat" id="pCat"></span><h3 id="pTitle"></h3></div>
+    <span class="p-count en" id="pCount" dir="ltr"></span>
+    <button class="p-x" type="button" id="pClose" data-i18n-aria="close"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
   </div>
+  <div class="p-main" id="pMain">
+    <button class="p-nav p-prev" type="button" id="pPrev" data-i18n-aria="prev"><svg viewBox="0 0 10 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2L2 8l6 6"/></svg></button>
+    <div class="p-stage" id="pStage"></div>
+    <button class="p-nav p-next" type="button" id="pNext" data-i18n-aria="next"><svg viewBox="0 0 10 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 2l6 6-6 6"/></svg></button>
+  </div>
+  <p class="p-hint" id="pHint"></p>
 </div>
 
 <script>
@@ -802,13 +818,13 @@ const SERVICES = [
 ];
 
 const T = {
-  ar:{all:"كل الأعمال",menu:"القائمة",close:"إغلاق",play:"شغّل",see:"شوف الأعمال",openDrive:"افتح في Google Drive",blocked:"صفحة المعاينة هنا تمنع تشغيل فيديوهات Google. افتح نسخة الموقع المرفوعة (أو ملف slash-website-deploy بالمتصفح) وراح يشتغل.",
+  ar:{all:"كل الأعمال",menu:"القائمة",close:"إغلاق",play:"شغّل",see:"شوف الأعمال",openDrive:"افتح في Google Drive",prev:"السابق",next:"التالي",swipe:"اسحب يمين أو يسار للفيديو الجاي",blocked:"صفحة المعاينة هنا تمنع تشغيل فيديوهات Google. افتح نسخة الموقع المرفوعة (أو ملف slash-website-deploy بالمتصفح) وراح يشتغل.",
       empty:"ماكو أعمال بهذا القسم حالياً.",more:"اعرض أكثر",of:"من",pick:"— اختار —",other:"غير ذلك / أكثر من نوع",
       frameNote:"إذا ما اشتغل الفيديو هنا، افتحه مباشرة من Google Drive.",
       need:"اكتب اسمك وشنو تحتاج حتى نكدر نرد عليك.",opened:"انفتحت رسالتك جاهزة — بس اضغط إرسال.",
       mHi:"مرحبا Slash،",mName:"الاسم",mCo:"الجهة",mSvc:"نوع الإنتاج",mMeet:"اللقاء",coffee:"قهوة",online:"أونلاين",mMsg:"التفاصيل",subj:"شراكة إنتاج — Slash",
       wa:"واتساب",mail:"البريد",ig:"إنستغرام"},
-  en:{all:"All Work",menu:"Menu",close:"Close",play:"Play",see:"See the work",openDrive:"Open in Google Drive",blocked:"This preview blocks Google-hosted video. Open the deployed site (or the slash-website-deploy file in a browser) to play it.",
+  en:{all:"All Work",menu:"Menu",close:"Close",play:"Play",see:"See the work",openDrive:"Open in Google Drive",prev:"Previous",next:"Next",swipe:"Swipe left or right for the next video",blocked:"This preview blocks Google-hosted video. Open the deployed site (or the slash-website-deploy file in a browser) to play it.",
       empty:"No work in this style yet.",more:"Show more",of:"of",pick:"— Choose —",other:"Other / several types",
       frameNote:"If the video doesn’t play here, open it directly in Google Drive.",
       need:"Add your name and what you need so we can reply.",opened:"Your message is ready — just press send.",
@@ -928,41 +944,78 @@ function renderGrid(animate){
   if(animate&&!reduce){grid.classList.add("fade");setTimeout(()=>{draw();requestAnimationFrame(()=>grid.classList.remove("fade"))},260)}else draw();
 }
 
-/* player — Drive's embedded player, inside the page (the most reliable way to play Drive files on a website). */
-const player=$("#player"), stage=$("#pStage"); let lastFocus=null, fbTimer=null;
+/* player — clean theater. Native video streamed straight from Drive (one set of controls);
+   falls back to Drive's embedded player, cropped, only if a file refuses to stream. */
+const player=$("#player"), stage=$("#pStage"); let lastFocus=null, fbTimer=null, pList=[], pIdx=0;
 const inPreview=/claude|anthropic/i.test(location.hostname);
-function openPlayer(i,from){
-  const w=WORKS[i]; if(!w)return; lastFocus=from||document.activeElement;
-  const r=parseFloat(RATIO[w.id]||"1.7778");
-  stage.style.setProperty("--ar",String(r)); stage.classList.toggle("tall",r<1);
-  stage.innerHTML=`<div class="p-load"><i></i></div><div class="p-err"><div>${T[lang].blocked}</div></div>`;
-  if(inPreview){ $(".p-load",stage).remove(); $(".p-err",stage).classList.add("show"); }
-  else{
-    const f=document.createElement("iframe");
-    f.src=`https://drive.google.com/file/d/${encodeURIComponent(w.id)}/preview`;
-    f.allow="autoplay; fullscreen; picture-in-picture; encrypted-media"; f.allowFullscreen=true;
-    f.referrerPolicy="strict-origin-when-cross-origin"; f.title=w.t||labelOf(w);
-    f.addEventListener("load",()=>$(".p-load",stage)?.remove(),{once:true});
-    stage.appendChild(f);
-  }
-  $("#pCat").textContent=labelOf(w); $("#pTitle").textContent=w.t||(lang==="ar"?grpOf(w.cat).ar:grpOf(w.cat).en);
-  player.classList.add("open"); player.setAttribute("aria-hidden","false");
-  document.body.style.overflow="hidden"; $("#pClose").focus();
+const streamUrl=id=>`https://drive.usercontent.google.com/download?id=${encodeURIComponent(id)}&export=download&confirm=t`;
+function sizeStage(r){ stage.style.setProperty("--ar",String(r));
+  const m=$("#pMain"), boxR=m.clientWidth/Math.max(1,m.clientHeight); stage.classList.toggle("wide",r>boxR); }
+function stopMedia(){ clearTimeout(fbTimer); $$("video",stage).forEach(v=>{v.pause();v.removeAttribute("src");v.load()}); stage.innerHTML=""; }
+function embedFallback(w){
+  clearTimeout(fbTimer); if(!player.classList.contains("open")||WORKS.indexOf(w)!==pList[pIdx])return;
+  $$("video",stage).forEach(v=>{v.pause();v.removeAttribute("src");v.load();v.remove()});
+  if($("iframe",stage))return;
+  const c=document.createElement("div"); c.className="crop";
+  const f=document.createElement("iframe");
+  f.src=`https://drive.google.com/file/d/${encodeURIComponent(w.id)}/preview`;
+  f.allow="autoplay; fullscreen; picture-in-picture; encrypted-media"; f.allowFullscreen=true; f.title=w.t||labelOf(w);
+  f.addEventListener("load",()=>$(".p-load",stage)?.remove(),{once:true});
+  c.appendChild(f); stage.appendChild(c);
 }
+function showWork(){
+  const w=WORKS[pList[pIdx]]; if(!w)return;
+  stopMedia();
+  sizeStage(parseFloat(RATIO[w.id]||"0.5625"));
+  stage.classList.remove("swap"); void stage.offsetWidth; stage.classList.add("swap");
+  stage.innerHTML=`<div class="p-load"><i></i></div><div class="p-err"><div>${T[lang].blocked}</div></div>`;
+  $("#pCat").textContent=labelOf(w); $("#pTitle").textContent=w.t||(lang==="ar"?grpOf(w.cat).ar:grpOf(w.cat).en);
+  $("#pCount").textContent=`${pIdx+1} / ${pList.length}`;
+  const ls=root.dir==="rtl"?1:-1, ok=n=>n>=0&&n<pList.length; $("#pPrev").disabled=!ok(pIdx+ls); $("#pNext").disabled=!ok(pIdx-ls);
+  if(inPreview){ $(".p-load",stage).remove(); $(".p-err",stage).classList.add("show"); return; }
+  const v=document.createElement("video");
+  Object.assign(v,{controls:true,playsInline:true,autoplay:true,preload:"auto"});
+  v.setAttribute("playsinline",""); v.setAttribute("webkit-playsinline",""); v.setAttribute("controlsList","nodownload noplaybackrate");
+  v.disablePictureInPicture=true; v.poster=thumb(w.id).replace("sz=w720","sz=w1600");
+  v.addEventListener("loadedmetadata",()=>{clearTimeout(fbTimer);$(".p-load",stage)?.remove();
+    if(v.videoWidth){const rr=v.videoWidth/v.videoHeight;RATIO[w.id]=rr.toFixed(4);sizeStage(rr)}},{once:true});
+  v.addEventListener("error",()=>embedFallback(w),{once:true});
+  v.addEventListener("ended",()=>{ if(pIdx<pList.length-1){pIdx++;showWork()} });
+  fbTimer=setTimeout(()=>{if(v.readyState<1)embedFallback(w)},9000);
+  v.src=streamUrl(w.id); stage.appendChild(v);
+  const p=v.play(); p&&p.catch(()=>{});
+}
+function step(d){ const n=pIdx+d; if(n<0||n>=pList.length)return; pIdx=n; showWork(); }
+function openPlayer(i,from){
+  lastFocus=from||document.activeElement;
+  pList=listNow().map(w=>WORKS.indexOf(w)); pIdx=Math.max(0,pList.indexOf(i));
+  $("#pHint").textContent=matchMedia("(max-width:640px)").matches?T[lang].swipe:"";
+  player.classList.add("open"); player.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden"; showWork(); $("#pClose").focus({preventScroll:true});
+}
+$("#pPrev").addEventListener("click",()=>step(root.dir==="rtl"?1:-1));
+$("#pNext").addEventListener("click",()=>step(root.dir==="rtl"?-1:1));
+addEventListener("resize",()=>{ if(player.classList.contains("open")){const w=WORKS[pList[pIdx]];sizeStage(parseFloat(RATIO[w.id]||"0.5625"))} });
+/* swipe between works on phones */
+(()=>{let x0=null,y0=null;const m=$("#pMain");
+  m.addEventListener("touchstart",e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY},{passive:true});
+  m.addEventListener("touchend",e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ const fwd=dx<0; step((root.dir==="rtl")?(fwd?-1:1):(fwd?1:-1)); }},{passive:true});
+})();
 function closePlayer(){
   if(!player.classList.contains("open"))return;
-  clearTimeout(fbTimer);
-  $$("video",stage).forEach(v=>{v.pause();v.removeAttribute("src");v.load()});
-  stage.innerHTML=""; /* stops any audio — no overlapping sound */
+  stopMedia();
   player.classList.remove("open"); player.setAttribute("aria-hidden","true");
   document.body.style.overflow=""; lastFocus&&lastFocus.focus();
 }
 $("#pClose").addEventListener("click",closePlayer);
-player.addEventListener("click",e=>{if(e.target===player)closePlayer()});
+player.addEventListener("click",e=>{if(e.target===$("#pMain"))closePlayer()});
 addEventListener("keydown",e=>{
   if(!player.classList.contains("open"))return;
   if(e.key==="Escape")closePlayer();
-  if(e.key==="Tab"){const f=$$("button,iframe,video",player);const first=f[0],last=f[f.length-1];
+  if(e.key==="ArrowRight")step(root.dir==="rtl"?-1:1);
+  if(e.key==="ArrowLeft")step(root.dir==="rtl"?1:-1);
+  if(e.key==="Tab"){const f=$$("button:not([disabled]),iframe,video",player);const first=f[0],last=f[f.length-1];
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
 });
 
