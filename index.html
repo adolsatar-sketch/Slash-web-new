@@ -985,7 +985,7 @@ function showWork(){
   stage.classList.remove("swap"); void stage.offsetWidth; stage.classList.add("swap");
   stage.style.background=`#000 url("${thumb(w.id).replace("sz=w720","sz=w1600")}") center/contain no-repeat`;
   stage.innerHTML=`<div class="p-load"><i></i></div><div class="p-err"><div>${T[lang].blocked}</div></div>`;
-  $("#pCat").textContent=labelOf(w); $("#pTitle").textContent=w.t||(lang==="ar"?grpOf(w.cat).ar:grpOf(w.cat).en);
+  $("#pCat").textContent=labelOf(w); $("#pTitle").textContent=w.t||""; $("#pTitle").hidden=!w.t;
   $("#pCount").textContent=`${pIdx+1} / ${pList.length}`;
   const ls=root.dir==="rtl"?1:-1, ok=n=>n>=0&&n<pList.length; $("#pPrev").disabled=!ok(pIdx+ls); $("#pNext").disabled=!ok(pIdx-ls);
   if(inPreview){ $(".p-load",stage).remove(); $(".p-err",stage).classList.add("show"); return; }
