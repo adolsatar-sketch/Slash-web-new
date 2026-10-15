@@ -242,33 +242,24 @@ html[dir="rtl"] .svc-go svg{transform:scaleX(-1)}
 html[dir="rtl"] .svc-go:hover svg{transform:scaleX(-1) translateX(3px)}
 .svc-more{margin-top:26px;color:var(--ink-3);font-size:15px}
 
-/* Process */
-.proc{background:var(--navy)}
-.steps{list-style:none;margin:60px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
-.step{position:relative;padding:34px 28px 0 0;border-top:1px solid rgba(204,204,204,.22)}
-html[dir="rtl"] .step{padding:34px 0 0 28px}
-.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--f-en);font-weight:700;font-size:15px;color:var(--gold);display:block;margin-bottom:18px}
-.step::after{content:"";position:absolute;top:-5px;inset-inline-start:0;width:9px;height:9px;background:var(--gold);transform:skewX(34deg)}
-.step h3{margin:0 0 10px;font-size:clamp(1.15rem,1.7vw,1.35rem);font-weight:600;line-height:1.4}
-.step p{margin:0;color:var(--ink-2);font-size:15.5px}
-.b2b{margin-top:clamp(60px,8vw,100px);display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,70px);align-items:center;padding:clamp(28px,4vw,46px);background:#000;border-radius:8px}
-.b2b .k{font-family:var(--f-en);font-size:clamp(2.6rem,6vw,4.6rem);font-weight:700;color:var(--gold);line-height:1;letter-spacing:-.03em}
-.b2b p{margin:0;font-size:clamp(1.02rem,1.6vw,1.22rem);color:var(--white)}
-.b2b p .sm{display:block;color:var(--ink-2);margin-top:8px;font-size:.92em}
-
-/* About */
-.about-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(40px,7vw,110px);align-items:start}
-.quote{margin:0;font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.45;font-weight:600}
-html[lang="en"] .quote{line-height:1.25;letter-spacing:-.015em}
-.quote::before{content:"";display:block;width:22px;height:54px;background:var(--gold);transform:skewX(34deg);margin-bottom:30px;margin-inline-start:12px}
-.about-body p{margin:0 0 20px;color:var(--ink-2)}
-.about-body p:first-child{color:var(--white);font-size:1.12em}
-.facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule);margin-top:36px}
-.facts div{padding:20px 0;border-bottom:1px solid var(--rule)}
-.facts div:nth-child(odd){padding-inline-end:20px}
-.facts b{display:block;font-family:var(--f-en);font-size:13px;color:var(--gold);font-weight:600;margin-bottom:6px}
-.facts span{color:var(--white);font-size:15.5px;line-height:1.55;display:block}
-
+/* Why us */
+.why{background:var(--navy)}
+.why-hd{max-width:760px}
+.why-hd .lead{margin:16px 0 0}
+.why-list{list-style:none;margin:clamp(44px,6vw,72px) 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
+.why-item{position:relative;background:#000;border-radius:8px;padding:clamp(26px,3.4vw,42px);overflow:hidden;transition:transform .45s var(--ease),opacity .9s var(--ease)}
+.why-item::before{content:"";position:absolute;top:0;inset-inline:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:var(--o,left);transition:transform .6s var(--ease)}
+html[dir="rtl"] .why-item::before{--o:right}
+.why-item:hover::before{transform:scaleX(1)}
+.why-item.rv.in:hover{transform:translateY(-3px)}
+.why-n{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;color:var(--gold);margin-bottom:22px}
+.why-n::after{content:"";width:8px;height:20px;background:var(--gold);transform:skewX(34deg);opacity:.9}
+.why-item h3{margin:0 0 16px;font-size:clamp(1.2rem,1.9vw,1.5rem);line-height:1.45;font-weight:600}
+html[lang="en"] .why-item h3{line-height:1.3}
+.why-tx p{margin:0 0 12px;color:var(--ink-2);font-size:15.5px}
+.why-tx p:last-child{margin-bottom:0}
+.why-tx p.em{color:var(--white);font-weight:600}
+@media (max-width:820px){.why-list{grid-template-columns:1fr}}
 /* FAQ */
 .faq{border-top:1px solid var(--rule)}
 .faq-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(40px,7vw,110px)}
@@ -318,6 +309,14 @@ fieldset.fld{border:0;margin:0 0 18px;padding:0}
 .f-act .btn{flex:1 1 180px}
 .f-msg{min-height:22px;margin:14px 0 0;font-size:14px;color:var(--ink-2)}
 .f-msg.err{color:#ff9d8f}
+.f-msg.ok{color:var(--gold)}
+.form .hint a{color:var(--gold);text-decoration:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#fSend{position:relative}
+#fSend .spin{display:none;width:16px;height:16px;border:2px solid rgba(0,0,0,.25);border-top-color:#000;border-radius:50%;animation:spin .8s linear infinite}
+#fSend[aria-busy="true"]{pointer-events:none;opacity:.85}
+#fSend[aria-busy="true"] .spin{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* Footer */
 .ftr{padding:56px 0 calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule)}
@@ -405,8 +404,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <a href="#home" data-nav><span data-l="ar">الرئيسية</span><span data-l="en">Home</span></a>
       <a href="#work" data-nav><span data-l="ar">أعمالنا</span><span data-l="en">Work</span></a>
       <a href="#services" data-nav><span data-l="ar">خدماتنا</span><span data-l="en">Services</span></a>
-      <a href="#process" data-nav><span data-l="ar">طريقة العمل</span><span data-l="en">How we work</span></a>
-      <a href="#about" data-nav><span data-l="ar">من نحن</span><span data-l="en">About</span></a>
+      <a href="#why" data-nav><span data-l="ar">ليش ويانا؟</span><span data-l="en">Why Slash</span></a>
       <a href="#contact" data-nav><span data-l="ar">تواصل</span><span data-l="en">Contact</span></a>
     </nav>
     <div class="hdr-act">
@@ -422,8 +420,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
     <a href="#home"><span data-l="ar">الرئيسية</span><span data-l="en">Home</span></a>
     <a href="#work"><span data-l="ar">أعمالنا</span><span data-l="en">Work</span></a>
     <a href="#services"><span data-l="ar">خدماتنا</span><span data-l="en">Services</span></a>
-    <a href="#process"><span data-l="ar">طريقة العمل</span><span data-l="en">How we work</span></a>
-    <a href="#about"><span data-l="ar">من نحن</span><span data-l="en">About</span></a>
+    <a href="#why"><span data-l="ar">ليش ويانا؟</span><span data-l="en">Why Slash</span></a>
     <a href="#contact"><span data-l="ar">تواصل</span><span data-l="en">Contact</span></a>
     <a class="btn btn-gold" href="#contact"><span data-l="ar">خل نحجي عن مشروعك</span><span data-l="en">Let’s Talk</span></a>
   </div>
@@ -518,43 +515,49 @@ html[dir="rtl"] .ftr nav{direction:rtl}
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="sec proc" id="process" aria-labelledby="proc-h">
+<!-- WHY US -->
+<section class="sec why" id="why" aria-labelledby="why-h">
   <div class="wrap">
-    <div class="rv">
-      <span class="tag">How we work</span>
-      <h2 class="h2" id="proc-h"><span data-l="ar">الشراكة بأربع خطوات</span><span data-l="en">The partnership, in four steps</span></h2>
+    <div class="why-hd rv">
+      <span class="tag">Why Slash</span>
+      <h2 class="h2" id="why-h"><span data-l="ar">ليش تشتغل ويانا؟</span><span data-l="en">Why work with us?</span></h2>
+      <p class="lead"><span data-l="ar">وشنو نوفرلك بالتعاون ويانا؟</span><span data-l="en">And what do you get when you partner with us?</span></p>
     </div>
-    <ol class="steps">
-      <li class="step rv"><h3><span data-l="ar">نحجي عن احتياج المشروع</span><span data-l="en">We talk through the project’s needs</span></h3><p><span data-l="ar">قهوة سوا أو <span class="en">Meeting</span> أونلاين نفهم بيه شنو يحتاج فريقك وعملاؤك.</span><span data-l="en">Over coffee or an online meeting, we learn what your team and clients need.</span></p></li>
-      <li class="step rv"><h3><span data-l="ar">نحدد الأسلوب والمخرجات والجدول</span><span data-l="en">We set the style, deliverables and schedule</span></h3><p><span data-l="ar">نتفق على النمط المطلوب، شنو راح يتسلم، وإيمتى.</span><span data-l="en">We agree on the style, what will be delivered, and when.</span></p></li>
-      <li class="step rv"><h3><span data-l="ar"><span class="en">Slash</span> تنسّق الإنتاج</span><span data-l="en">Slash coordinates production</span></h3><p><span data-l="ar">نوفر التخصص المناسب لكل جزء من الشغل، من مكان واحد.</span><span data-l="en">We bring the right specialism to each part of the work, from one place.</span></p></li>
-      <li class="step rv"><h3><span data-l="ar">تستلم شغل منظم</span><span data-l="en">You receive organised work</span></h3><p><span data-l="ar">من شريك إنتاج واحد، بدل ما تلاحق أكثر من شخص.</span><span data-l="en">From one production partner, instead of chasing several people.</span></p></li>
-    </ol>
-    <div class="b2b rv">
-      <div class="k en">B2B</div>
-      <p><span data-l="ar">نوفر لشركائنا أسعار <span class="en">B2B</span> مدعومة ومصممة للتعاون المستمر.<span class="sm">ويا جودة إنتاج عالية، التزام بالمواعيد، وقدرة على تغطية أنماط مختلفة من مكان واحد.</span></span><span data-l="en">We offer our partners supported B2B pricing designed for ongoing collaboration.<span class="sm">With high production quality, commitment to deadlines, and the ability to cover different styles from one place.</span></span></p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="sec" id="about" aria-labelledby="about-h">
-  <div class="wrap">
-    <span class="tag rv">About</span>
-    <h2 class="sr" id="about-h"><span data-l="ar">من نحن</span><span data-l="en">About Slash</span></h2>
-    <div class="about-grid">
-      <blockquote class="quote rv"><span data-l="ar">في سلاش، نرسم ملامح المستقبل بإبداع متجدد وطموح ما يعرف الحدود، لنحوّل الأفكار إلى إعلانات تبهر وتلهم.</span><span data-l="en">At Slash, we sketch what comes next — with renewed creativity and ambition without limits — turning ideas into ads that impress and inspire.</span></blockquote>
-      <div class="about-body rv">
-        <p><span data-l="ar"><span class="en">Slash Creative Motion Studio</span> — ستوديو سلاش الإبداعي. بدأنا بإعلانات الموشن جرافيك ثلاثية الأبعاد بدون وجوه، بأسلوب غير تقليدي ونصوص إعلانية غير مباشرة.</span><span data-l="en">Slash Creative Motion Studio. We started with faceless 3D motion graphic ads — unconventional in style, with indirect ad copy.</span></p>
-        <p><span data-l="ar">هدفنا نغيّر مفهوم الإعلان التقليدي: إعلانات تبين كأنها محتوى عادي على السوشيال ميديا، تجذب الجمهور بشكل طبيعي وغير مبالغ بيه، وتقوّي تفاعلهم ويا خدمات عملائنا.</span><span data-l="en">Our aim is to change what a traditional ad looks like: ads that read as ordinary social content, drawing audiences in naturally, without exaggeration, and strengthening how they engage with our clients’ services.</span></p>
-        <p><span data-l="ar">اليوم نجمع هالروح ويا أنماط إنتاج متعددة، حتى نكون شريك إنتاج واحد للوكالات وفرق التسويق.</span><span data-l="en">Today we bring that same spirit to many production styles, so we can be one production partner for agencies and marketing teams.</span></p>
-        <div class="facts">
-          <div><b>Approach</b><span><span data-l="ar">تقنيات حديثة ونصوص إعلانية غير مباشرة</span><span data-l="en">Modern techniques, indirect ad copy</span></span></div>
-          <div><b>Who we work with</b><span><span data-l="ar">وكالات، فرق تسويق، مشاريع ومتاجر إلكترونية وشركات</span><span data-l="en">Agencies, marketing teams, businesses, online stores and companies</span></span></div>
+    <ol class="why-list">
+      <li class="why-item rv">
+        <span class="why-n en" aria-hidden="true">01</span>
+        <h3><span data-l="ar">كل أنماط الإنتاج من <span class="en">Partner</span> واحد</span><span data-l="en">Every production style from one partner</span></h3>
+        <div class="why-tx">
+          <p><span data-l="ar">بدل ما كل ما تحتاج <span class="en">Motion</span>، مونتاج، تصوير، <span class="en">AI</span> أو <span class="en">Style</span> جديد تدور على شخص مختلف، <span class="en">Slash</span> تجمع لك احتياجات الإنتاج بمكان واحد.</span><span data-l="en">Instead of hunting for a different person every time you need motion, editing, filming, AI or a new style, Slash brings your production needs together in one place.</span></p>
+          <p class="em"><span data-l="ar"><span class="en">Partner</span> واحد، تواصل واحد، وتسليم واحد، مهما اختلف نوع الشغل.</span><span data-l="en">One partner, one line of communication, one delivery — whatever the work.</span></p>
         </div>
-      </div>
-    </div>
+      </li>
+      <li class="why-item rv">
+        <span class="why-n en" aria-hidden="true">02</span>
+        <h3><span data-l="ar">لا تخلي قدرات فريقك تحدد أفكاركم</span><span data-l="en">Don’t let your team’s skills limit your ideas</span></h3>
+        <div class="why-tx">
+          <p><span data-l="ar">شفت <span class="en">Reference</span> وتريد تنفذه؟ عميلك طلب <span class="en">Style</span> مو موجود عندك؟ أو تريد تدخل نمط جديد بالمحتوى؟</span><span data-l="en">Saw a reference you want to make? A client asked for a style you don’t have? Want to bring a new format into your content?</span></p>
+          <p class="em"><span data-l="ar">مو لازم يكون عندك <span class="en">Specialist</span> لكل فكرة. دزّلنا الـ<span class="en">Reference</span> أو الـ<span class="en">Brief</span>، وإحنا نشوف شلون نقدر ننفذه إلك.</span><span data-l="en">You don’t need a specialist for every idea. Send us the reference or the brief, and we’ll work out how to make it for you.</span></p>
+        </div>
+      </li>
+      <li class="why-item rv">
+        <span class="why-n en" aria-hidden="true">03</span>
+        <h3><span data-l="ar"><span class="en">Partner</span> تگدر تعتمد عليه، ويحافظ على علاقتك بعميلك</span><span data-l="en">A partner you can rely on — who protects your client relationships</span></h3>
+        <div class="why-tx">
+          <p><span data-l="ar">بدل ما كل مشروع تختبر <span class="en">Freelancer</span> جديد بالجودة والالتزام والتوفر، ويا <span class="en">Slash</span> تتعامل ويا <span class="en">Production Partner</span> ثابت يعرف شغلك ويحافظ على عملائك. نشتغل خلف فريقك، ما نتواصل ويا عميلك ولا ننشر أعمالك.</span><span data-l="en">Instead of testing a new freelancer’s quality, commitment and availability on every project, with Slash you work with a steady production partner who knows your work and protects your clients. We work behind your team — we don’t contact your client, and we don’t publish your work.</span></p>
+          <p><span data-l="ar">الـ<span class="en">Freelancer</span> ممكن يتأخر، يختفي وقت الضغط، تختلف جودته، أو يتواصل مباشرة ويا عميلك. وإذا صار خلل بالتنفيذ، أنت اللي تتحمله قدام العميل. ويا <span class="en">Slash</span> نتحمل مسؤولية مشاكل الإنتاج والتنفيذ، ونضمن لك جودة ثابتة وتسليماً واضحاً وأسعاراً مناسبة للتعاون المستمر.</span><span data-l="en">A freelancer can run late, disappear under pressure, deliver uneven quality, or reach out to your client directly — and when execution slips, you’re the one answering for it. With Slash, we own production and execution problems, and guarantee consistent quality, clear delivery and pricing built for ongoing collaboration.</span></p>
+        </div>
+      </li>
+      <li class="why-item rv">
+        <span class="why-n en" aria-hidden="true">04</span>
+        <h3><span data-l="ar">إنتاج يكبر ويصغر ويا حجم شغلك</span><span data-l="en">Production that scales up and down with your workload</span></h3>
+        <div class="why-tx">
+          <p><span data-l="ar">هذا مهم جداً للوكالات والـ<span class="en">Marketing Teams</span>.</span><span data-l="en">This matters most for agencies and marketing teams.</span></p>
+          <p><span data-l="ar">شهر عندك 5 فيديوهات، شهر عندك 30، أو فجأة دخلت <span class="en">Campaign</span> كبيرة؛ ما تحتاج تبني فريق دائم على أعلى ضغط ممكن يمر عليك.</span><span data-l="en">One month you have 5 videos, the next 30, or suddenly a big campaign lands; you don’t need to build a permanent team sized for your busiest moment.</span></p>
+          <p class="em"><span data-l="ar"><span class="en">Slash</span> تصير الـ<span class="en">Production Capacity</span> الإضافية وقت ما تحتاجها.</span><span data-l="en">Slash becomes your extra production capacity, whenever you need it.</span></p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -595,9 +598,10 @@ html[dir="rtl"] .ftr nav{direction:rtl}
     </div>
     <form class="form rv" id="form" novalidate>
       <h3><span data-l="ar">احجي ويانا عن احتياج فريقك</span><span data-l="en">Tell us what your team needs</span></h3>
-      <p class="hint"><span data-l="ar">الإرسال يفتح واتساب أو البريد برسالة جاهزة بتفاصيلك.</span><span data-l="en">Sending opens WhatsApp or email with your details ready to go.</span></p>
-      <div class="fld"><label for="f-name"><span data-l="ar">الاسم</span><span data-l="en">Name</span></label><input id="f-name" name="name" autocomplete="name" required></div>
-      <div class="fld"><label for="f-co"><span data-l="ar">الوكالة أو الشركة</span><span data-l="en">Agency or company</span></label><input id="f-co" name="company" autocomplete="organization"></div>
+      <p class="hint"><span data-l="ar">رسالتك توصل مباشرة إلى <a href="mailto:info@slashplatform.com" class="en" dir="ltr">info@slashplatform.com</a></span><span data-l="en">Your message goes straight to <a href="mailto:info@slashplatform.com" dir="ltr">info@slashplatform.com</a></span></p>
+      <div class="fld"><label for="f-name"><span data-l="ar">الاسم *</span><span data-l="en">Name *</span></label><input id="f-name" name="name" autocomplete="name" required maxlength="120"></div>
+      <div class="fld"><label for="f-email"><span data-l="ar">البريد الإلكتروني *</span><span data-l="en">Email *</span></label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" dir="ltr" required maxlength="200"></div>
+      <div class="fld"><label for="f-co"><span data-l="ar">الوكالة أو الشركة</span><span data-l="en">Agency or company</span></label><input id="f-co" name="company" autocomplete="organization" maxlength="160"></div>
       <div class="fld"><label for="f-svc"><span data-l="ar">نوع الإنتاج</span><span data-l="en">Production type</span></label><select id="f-svc" name="service"></select></div>
       <fieldset class="fld"><legend><span data-l="ar">نلتقي</span><span data-l="en">Let’s meet</span></legend>
         <div class="seg">
@@ -605,12 +609,12 @@ html[dir="rtl"] .ftr nav{direction:rtl}
           <label><input type="radio" name="meet" value="online"><span><span data-l="ar">أونلاين</span><span data-l="en">Online</span></span></label>
         </div>
       </fieldset>
-      <div class="fld"><label for="f-msg"><span data-l="ar">شنو تحتاج؟</span><span data-l="en">What do you need?</span></label><textarea id="f-msg" name="message" required></textarea></div>
+      <div class="fld"><label for="f-msg"><span data-l="ar">شنو تحتاج؟ *</span><span data-l="en">What do you need? *</span></label><textarea id="f-msg" name="message" required maxlength="5000"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="f-act">
-        <button class="btn btn-gold" type="submit" data-via="wa"><span data-l="ar">أرسل عبر واتساب</span><span data-l="en">Send via WhatsApp</span></button>
-        <button class="btn btn-line" type="submit" data-via="mail"><span data-l="ar">أرسل بالبريد</span><span data-l="en">Send by email</span></button>
+        <button class="btn btn-gold" type="submit" id="fSend"><span class="lbl"><span data-l="ar">أرسل الرسالة</span><span data-l="en">Send message</span></span><span class="spin" aria-hidden="true"></span></button>
       </div>
-      <p class="f-msg" id="fMsg" role="status"></p>
+      <p class="f-msg" id="fMsg" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -623,8 +627,7 @@ html[dir="rtl"] .ftr nav{direction:rtl}
       <nav aria-label="Footer">
         <a href="#work"><span data-l="ar">أعمالنا</span><span data-l="en">Work</span></a>
         <a href="#services"><span data-l="ar">خدماتنا</span><span data-l="en">Services</span></a>
-        <a href="#process"><span data-l="ar">طريقة العمل</span><span data-l="en">How we work</span></a>
-        <a href="#about"><span data-l="ar">من نحن</span><span data-l="en">About</span></a>
+        <a href="#why"><span data-l="ar">ليش ويانا؟</span><span data-l="en">Why Slash</span></a>
         <a href="#faq"><span data-l="ar">أسئلة شائعة</span><span data-l="en">FAQ</span></a>
         <a href="#contact"><span data-l="ar">تواصل</span><span data-l="en">Contact</span></a>
       </nav>
@@ -797,7 +800,7 @@ const HERO_VIDEO = { src:"", poster:"" };
 /* Contact — carried over from the Slash Target System brief; confirm before launch. */
 const CONTACT = {
   whatsapp:"9647770148868", phoneDisplay:"0777 014 8868",
-  email:"Slashviral@gmail.com",
+  email:"info@slashplatform.com",
   instagram:"https://www.instagram.com/slash.viral"
 };
 
@@ -836,13 +839,13 @@ const T = {
   ar:{all:"كل الأعمال",menu:"القائمة",close:"إغلاق",play:"شغّل",see:"شوف الأعمال",openDrive:"افتح في Google Drive",prev:"السابق",next:"التالي",swipe:"اسحب يمين أو يسار للفيديو الجاي",blocked:"صفحة المعاينة هنا تمنع تشغيل فيديوهات Google. افتح نسخة الموقع المرفوعة (أو ملف slash-website-deploy بالمتصفح) وراح يشتغل.",
       empty:"ماكو أعمال بهذا القسم حالياً.",more:"اعرض أكثر",of:"من",pick:"— اختار —",other:"غير ذلك / أكثر من نوع",
       frameNote:"إذا ما اشتغل الفيديو هنا، افتحه مباشرة من Google Drive.",
-      need:"اكتب اسمك وشنو تحتاج حتى نكدر نرد عليك.",opened:"انفتحت رسالتك جاهزة — بس اضغط إرسال.",
+      need:"اكتب اسمك وبريدك وشنو تحتاج حتى نكدر نرد عليك.",badEmail:"تأكد من البريد الإلكتروني.",sending:"جاري الإرسال…",sent:"وصلت رسالتك ✓ راح نرد عليك بأقرب وقت.",failed:"ما وصلت الرسالة، حاول مرة ثانية أو راسلنا مباشرة على",opened:"انفتحت رسالتك جاهزة — بس اضغط إرسال.",
       mHi:"مرحبا Slash،",mName:"الاسم",mCo:"الجهة",mSvc:"نوع الإنتاج",mMeet:"اللقاء",coffee:"قهوة",online:"أونلاين",mMsg:"التفاصيل",subj:"شراكة إنتاج — Slash",
       wa:"واتساب",mail:"البريد",ig:"إنستغرام"},
   en:{all:"All Work",menu:"Menu",close:"Close",play:"Play",see:"See the work",openDrive:"Open in Google Drive",prev:"Previous",next:"Next",swipe:"Swipe left or right for the next video",blocked:"This preview blocks Google-hosted video. Open the deployed site (or the slash-website-deploy file in a browser) to play it.",
       empty:"No work in this style yet.",more:"Show more",of:"of",pick:"— Choose —",other:"Other / several types",
       frameNote:"If the video doesn’t play here, open it directly in Google Drive.",
-      need:"Add your name and what you need so we can reply.",opened:"Your message is ready — just press send.",
+      need:"Add your name, email and what you need so we can reply.",badEmail:"Please check the email address.",sending:"Sending…",sent:"Message received ✓ We’ll get back to you soon.",failed:"Your message didn’t go through. Try again or email us at",opened:"Your message is ready — just press send.",
       mHi:"Hi Slash,",mName:"Name",mCo:"Company",mSvc:"Production type",mMeet:"Meeting",coffee:"Coffee",online:"Online",mMsg:"Details",subj:"Production partnership — Slash",
       wa:"WhatsApp",mail:"Email",ig:"Instagram"}
 };
@@ -881,7 +884,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&mnav.classList.contains("ope
 /* active nav */
 const navLinks=$$("[data-nav]");
 const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}})},{rootMargin:"-45% 0px -50% 0px"});
-["home","work","services","process","about","contact"].forEach(id=>{const s=document.getElementById(id);s&&spy.observe(s)});
+["home","work","services","why","contact"].forEach(id=>{const s=document.getElementById(id);s&&spy.observe(s)});
 
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -10% 0px"});
@@ -1056,27 +1059,35 @@ function renderSelect(){
 function renderChannels(){
   const ch=[];
   if(CONTACT.whatsapp)ch.push(`<a class="btn btn-line btn-sm" href="https://wa.me/${CONTACT.whatsapp}" target="_blank" rel="noopener">${T[lang].wa} · <span dir="ltr">${CONTACT.phoneDisplay}</span></a>`);
-  if(CONTACT.email)ch.push(`<a class="btn btn-line btn-sm" href="mailto:${CONTACT.email}">${T[lang].mail}</a>`);
+  if(CONTACT.email)ch.push(`<a class="btn btn-line btn-sm" href="mailto:${CONTACT.email}"><span dir="ltr">${CONTACT.email}</span></a>`);
   if(CONTACT.instagram)ch.push(`<a class="btn btn-line btn-sm" href="${CONTACT.instagram}" target="_blank" rel="noopener">${T[lang].ig}</a>`);
   $("#chan").innerHTML=ch.join("");
 }
-let via="wa";
-$$("[data-via]").forEach(b=>b.addEventListener("click",()=>via=b.dataset.via));
-$("#form").addEventListener("submit",e=>{
+/* Contact form → POST /api/contact (Vercel serverless function sends the email server-side). */
+const FORM_ENDPOINT="/api/contact";
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+$("#form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const f=e.target, t=T[lang], msg=$("#fMsg");
-  const name=f.name.value.trim(), body=f.message.value.trim();
-  f.name.setAttribute("aria-invalid",String(!name)); f.message.setAttribute("aria-invalid",String(!body));
-  if(!name||!body){msg.textContent=t.need;msg.className="f-msg err";(name?f.message:f.name).focus();return}
-  const svc=f.service.value==="other"?t.other:f.service.value;
-  const meet=f.meet.value==="online"?t.online:t.coffee;
-  const lines=[t.mHi,"",`${t.mName}: ${name}`,f.company.value.trim()?`${t.mCo}: ${f.company.value.trim()}`:"",svc?`${t.mSvc}: ${svc}`:"",`${t.mMeet}: ${meet}`,"",`${t.mMsg}:`,body].filter((l,i,a)=>l!==""||a[i-1]!=="");
-  const text=lines.join("\n");
-  const url=via==="mail"
-    ?`mailto:${CONTACT.email}?subject=${encodeURIComponent(t.subj)}&body=${encodeURIComponent(text)}`
-    :`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
-  if(via==="mail")location.href=url;else window.open(url,"_blank","noopener");
-  msg.textContent=t.opened;msg.className="f-msg";
+  const f=e.target, t=T[lang], msg=$("#fMsg"), btn=$("#fSend");
+  const data={ name:f.name.value.trim(), email:f.email.value.trim(), company:f.company.value.trim(),
+    service:f.service.value==="other"?t.other:f.service.value, meet:f.meet.value==="online"?t.online:t.coffee,
+    message:f.message.value.trim(), website:f.website.value, lang };
+  const bad={name:!data.name, email:!emailOk(data.email), message:data.message.length<5};
+  Object.entries(bad).forEach(([k,v])=>f[k].setAttribute("aria-invalid",String(v)));
+  if(bad.name||bad.email||bad.message){
+    msg.textContent=bad.email&&data.email?t.badEmail:t.need; msg.className="f-msg err";
+    (bad.name?f.name:bad.email?f.email:f.message).focus(); return;
+  }
+  btn.setAttribute("aria-busy","true"); msg.textContent=t.sending; msg.className="f-msg";
+  try{
+    const r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.ok) throw new Error(j.error||("HTTP "+r.status));
+    msg.textContent=t.sent; msg.className="f-msg ok"; f.reset(); renderSelect();
+    $$("[aria-invalid]",f).forEach(el=>el.removeAttribute("aria-invalid"));
+  }catch(err){
+    msg.innerHTML=`${t.failed} <a href="mailto:info@slashplatform.com" dir="ltr" style="color:inherit">info@slashplatform.com</a>`; msg.className="f-msg err";
+  }finally{ btn.removeAttribute("aria-busy"); }
 });
 
 /* boot */
